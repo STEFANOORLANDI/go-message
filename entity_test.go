@@ -6,6 +6,8 @@ import (
 	"io/ioutil"
 	"strings"
 	"testing"
+
+	"github.com/emersion/go-message/textproto"
 )
 
 func testMakeEntity() *Entity {
@@ -131,6 +133,40 @@ func TestRead_multipart(t *testing.T) {
 	}
 
 	testMultipart(t, e)
+}
+
+func TestReadWithOptions_multipart(t *testing.T) {
+	// MaxHeaderLineLength option will be set to the default value
+	e, err := ReadWithOptions(strings.NewReader(testMultipartText), nil)
+	if err != nil {
+		t.Fatal("Expected no error while reading multipart, got", err)
+	}
+
+	testMultipart(t, e)
+
+	// setting MaxHeaderLineLength to -1 will disable the limit
+	e, err = ReadWithOptions(strings.NewReader(testMultipartText), &ReadOptions{
+		textproto.ReadOptions{
+			MaxHeaderLineLength: -1,
+		},
+	})
+	if err != nil {
+		t.Fatal("Expected no error while reading multipart, got", err)
+	}
+
+	testMultipart(t, e)
+
+	e, err = ReadWithOptions(strings.NewReader(testMultipartText), &ReadOptions{
+		textproto.ReadOptions{
+			MaxHeaderLineLength: 10,
+		},
+	})
+	if err == nil {
+		t.Fatalf("ReadWithOptions() succeeded with a low limit")
+	}
+	if _, ok := err.(textproto.TooBigError); !ok {
+		t.Fatalf("Not TooBigError returned: %T", err)
+	}
 }
 
 func TestRead_single(t *testing.T) {
