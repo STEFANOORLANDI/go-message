@@ -7,6 +7,6 @@
 // by default:
 //
 //   import (
-//   	_ "github.com/emersion/go-message/charset"
+//   	_ "github.com/STEFANOORLANDI/go-message/charset"
 //   )
 package message

@@ -7,7 +7,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/emersion/go-message/textproto"
+	"github.com/STEFANOORLANDI/go-message/textproto"
 )
 
 func testMakeEntity() *Entity {
@@ -49,7 +49,7 @@ func testMakeMultipart() *Entity {
 	return e
 }
 
-const testMultipartHeader = "Mime-Version: 1.0\r\n"+
+const testMultipartHeader = "Mime-Version: 1.0\r\n" +
 	"Content-Type: multipart/alternative; boundary=IMTHEBOUNDARY\r\n\r\n"
 
 const testMultipartBody = "--IMTHEBOUNDARY\r\n" +

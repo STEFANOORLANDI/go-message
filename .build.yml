@@ -5,7 +5,7 @@ packages:
   - bash
   - findutils
 sources:
-  - https://github.com/emersion/go-message
+  - https://github.com/STEFANOORLANDI/go-message
 tasks:
   - build: |
       cd go-message

@@ -4,7 +4,7 @@ import (
 	"regexp"
 	"testing"
 
-	"github.com/emersion/go-message/mail"
+	"github.com/STEFANOORLANDI/go-message/mail"
 )
 
 const mailString = "Subject: Your Name\r\n" +
